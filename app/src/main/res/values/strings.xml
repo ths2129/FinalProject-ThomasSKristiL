@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Teach Green</string>
+    <string name="welcome">Welcome</string>
+    <string name="change">Learn Green Practices</string>
+    <string name="teach_green">Click to Begin</string>
+    <string name="quiz">Carbon Facts Quiz</string>
+    <string name="quiz_description">Learn facts about about green practices</string>
+    <string name="company">Green Companies</string>
+    <string name="company_description">Learn what companies engage in green practices</string>
+    <string name="email">Email Local Representative</string>
+    <string name="email_description">Email your local representative about green initiatives</string>
+    <string name="forum">Forum</string>
+    <string name="forum_description">Exchange ideas</string>
+    <string name="game">Recycling Game</string>
+    <string name="game_description">Interactive game-play with rewards for recycling materials in correct bins</string>
+    <string name="recycling_centers">Recycling Centers</string>
+    <string name="recycling_centers_description">Map of recycling center locations</string>
+
+</resources>

@@ -48,14 +48,15 @@ public class SelectionViewHolder extends RecyclerView.ViewHolder implements View
                 String message = descript.getText().toString();
 
 
-                Toast.makeText(v.getContext(), "This is " + message + " option " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "This is " + message + " option " + getAdapterPosition(), Toast.LENGTH_LONG).show();
 
                 //go through each item if you have few items within recycler view
                 if (getLayoutPosition() == 0) {
-
+                    Intent intent = new Intent(context, CarbonQuizActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
 
                 } else if (getLayoutPosition() == 1) {
-
 
                 } else if (getLayoutPosition() == 2) {
 

@@ -43,7 +43,8 @@ public class SecondActivity extends AppCompatActivity {
             }
 
 
-                public void dataToInitialize () {
+
+    public void dataToInitialize () {
                     selections = new ArrayList<>(); //This is calling the global array variable
                     selections.add(new Selection(R.string.quiz, R.string.quiz_description, R.drawable.foot)); //linked to global array and Question class
                     selections.add(new Selection(R.string.email, R.string.email_description, R.drawable.letter)); //linked to global array and Question class

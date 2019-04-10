@@ -9,6 +9,8 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +20,11 @@ public class SelectionAdapter extends RecyclerView.Adapter<SelectionViewHolder> 
     //questions adapted to the View in XML
     public List<Selection> selections; //links to Selection class constructor - that is what binds holders the getters
     public Context context;
-    private OnClickRecycleListener mOnClickRecylerViewListener;
-    //private ArrayList<String> mLink = new ArrayList<>();
+    public RelativeLayout relativeLayout;
 
+
+
+    //private ArrayList<String> mLink = new ArrayList<>();
 
 
     public SelectionAdapter(List<Selection> selections, Context context) { //constructor
@@ -43,7 +47,10 @@ public class SelectionAdapter extends RecyclerView.Adapter<SelectionViewHolder> 
         holder.descriptionSelection.setText(selection.description);
         holder.activityImage.setImageResource(selection.photoID);
 
-        Intent intent = new Intent(context, MainActivity.class);
+
+
+
+
 
     }
 
@@ -52,28 +59,4 @@ public class SelectionAdapter extends RecyclerView.Adapter<SelectionViewHolder> 
         return selections.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
-        OnClickRecycleListener onClickRecycleListener;
-
-        public ViewHolder(@NonNull View itemView, OnClickRecycleListener onClickRecycleListener) {
-            super(itemView);
-            this.onClickRecycleListener = onClickRecycleListener;
-
-            itemView.setOnClickListener(this);
-        }
-        @Override
-        public void onClick(View v) {
-            onClickRecycleListener.onNoteClick(getAdapterPosition());//pass position when clicked
-        }
-
-    }
-
-    public interface OnClickRecycleListener{
-        void onNoteClick(int position);
-
-
-    }
-
 }
-

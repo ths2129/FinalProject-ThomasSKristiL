@@ -48,7 +48,7 @@ public class SelectionViewHolder extends RecyclerView.ViewHolder implements View
                 String message = descript.getText().toString();
 
 
-                Toast.makeText(v.getContext(), "This is " + message + " option " + getAdapterPosition(), Toast.LENGTH_LONG).show();
+                Toast.makeText(v.getContext(), "This is " + message + " option ", Toast.LENGTH_LONG).show();
 
                 //go through each item if you have few items within recycler view
                 if (getLayoutPosition() == 0) {
@@ -57,8 +57,15 @@ public class SelectionViewHolder extends RecyclerView.ViewHolder implements View
                     context.startActivity(intent);
 
                 } else if (getLayoutPosition() == 1) {
+                    Intent intent = new Intent(context, EmailRepresentativeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+
 
                 } else if (getLayoutPosition() == 2) {
+                    Intent intent = new Intent(context, ForumActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
 
                 } else if (getLayoutPosition() == 3) {
 

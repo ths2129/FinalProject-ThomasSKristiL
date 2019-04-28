@@ -29,4 +29,11 @@
         app:showAsAction="never"
         />
 
+
+        <item
+            android:id="@+id/sign_out_menu"
+            android:title="string/sign"
+            app:showAsAction="never"/>
+
+
 </menu>

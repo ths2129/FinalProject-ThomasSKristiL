@@ -15,5 +15,10 @@
     <string name="game_description">Interactive game-play with rewards for recycling materials in correct bins</string>
     <string name="recycling_centers">Recycling Centers</string>
     <string name="recycling_centers_description">Map of recycling center locations</string>
-
+    <string name="game_name">Land Fill</string>
+    <string name="start">START</string>
+    <string name="quit">QUIT</string>
+    <string name="high_score">HIGH SCORE</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="send_button_label">Send</string>
 </resources>

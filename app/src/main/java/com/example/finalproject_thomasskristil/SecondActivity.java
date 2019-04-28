@@ -3,6 +3,7 @@ package com.example.finalproject_thomasskristil;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class SecondActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     private ArrayList<Selection>selections; //Connects to the intialData method
     private SelectionAdapter selectionAdapter; //calling the adapter
+    private MediaPlayer background;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -33,6 +35,11 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection_page);
+
+
+        background = MediaPlayer.create(this, R.raw.recycler_screen_music);
+        background.setLooping(true);
+        background.start();
 
         dataToInitialize();
         recyclerView = findViewById(R.id.recycler_view);
@@ -69,6 +76,10 @@ public class SecondActivity extends AppCompatActivity {
             case R.id.share:
                 Toast.makeText(this, "Share it Baby", Toast.LENGTH_SHORT).show();
                 return true;
+            case R.id.sign_out_menu:
+                Toast.makeText(this,"Bye", Toast.LENGTH_LONG).show();
+                signOut();
+                return true;
             case R.id.camera:
                 Toast.makeText(this, "capture Baby", Toast.LENGTH_SHORT).show();
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -77,5 +88,19 @@ public class SecondActivity extends AppCompatActivity {
                 return true;
                 default:
                     return super.onOptionsItemSelected(item);
-            }}}
+            }}
+
+    private void signOut() {
+        signOut();
+    }
+
+
+    public void onDestroy() {
+        super.onDestroy();
+        background.stop();
+    }
+    public void onPause() {
+        super.onPause();
+        background.stop();
+}}
 

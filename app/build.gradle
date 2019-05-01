@@ -37,8 +37,10 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
     implementation 'com.google.firebase:firebase-messaging:10.2.1'
     implementation 'com.google.firebase:firebase-functions:16.3.0'
+    implementation 'com.google.maps.android:android-maps-utils:0.5+'
 
 
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

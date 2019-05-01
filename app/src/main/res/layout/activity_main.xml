@@ -63,7 +63,9 @@
             android:textAllCaps="true"
             android:textColor="@color/text_theme"
             android:textColorHighlight="@color/dirt"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:background="@android:color/white"
+            android:elevation="40dp"/>
     </RelativeLayout>
 
 </ScrollView>

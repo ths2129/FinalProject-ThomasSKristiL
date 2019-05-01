@@ -406,17 +406,12 @@ public class ForumActivity extends AppCompatActivity {
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.save:
-                Intent intent = new Intent();
-
-                Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
-                return true;
             case R.id.share:
                 Toast.makeText(this, "Share it Baby", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.sign_out_menu:
                 Toast.makeText(this,"Bye", Toast.LENGTH_LONG).show();
-                signOut();
+                AuthUI.getInstance().signOut(this);
                 return true;
             case R.id.camera:
                 Toast.makeText(this, "capture Baby", Toast.LENGTH_SHORT).show();

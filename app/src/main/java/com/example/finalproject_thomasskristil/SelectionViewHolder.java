@@ -63,16 +63,19 @@ public class SelectionViewHolder extends RecyclerView.ViewHolder implements View
 
 
                 } else if (getLayoutPosition() == 2) {
-                    Intent intent = new Intent(context, ForumActivity.class);
+                    Intent intent = new Intent(context, ForumRules.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
 
                 } else if (getLayoutPosition() == 3) {
 
                 } else if (getLayoutPosition() == 4) {
+                    Intent intent = new Intent (context, RecycleMapsActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
 
                 } else if (getLayoutPosition() == 5) {
-                    Intent intent = new Intent(context, GameActivity.class);
+                    Intent intent = new Intent(context, GameStart.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 }

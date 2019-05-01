@@ -4,12 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@color/fui_buttonShadow">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recycle"
+        android:text="@string/game_rules"
         android:textSize="32sp"/>
 
     <TableLayout
@@ -22,41 +23,54 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/foot"/>
+                android:src="@drawable/plastic"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="15 point"
+                android:text="@string/plastic_point"
                 android:textSize="18sp"
                 android:paddingLeft="10dp"/>
         </TableRow>
 
         <TableRow
-            android:layout_marginTop="20dp"
             android:gravity="center_vertical">
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/foot"/>
+                android:src="@drawable/earth"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5 point"
+                android:text="@string/earth_point"
+                android:textSize="18sp"
+                android:paddingLeft="10dp"/>
+        </TableRow>
+
+
+        <TableRow
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/recycle_game"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recycle_point"
                 android:textSize="18sp"
                 android:paddingLeft="10dp"/>
         </TableRow>
 
         <TableRow
-            android:layout_marginTop="20dp"
             android:gravity="center_vertical">
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/foot"/>
+                android:src="@drawable/garbage_bag"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Game Over"
+                android:text="@string/garbage_point"
                 android:textSize="18sp"
                 android:paddingLeft="10dp"/>
         </TableRow>
@@ -69,7 +83,17 @@
         android:layout_height="wrap_content"
         android:text="@string/start"
         android:layout_marginTop="60dp"
-        android:onClick="startGame"/>
+        android:onClick="startGame"
+        android:background="@android:color/holo_green_dark"
+        android:elevation="10dp"
+        />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/go_back"
+        android:layout_marginTop="60dp"
+        android:onClick="goBack"
+        android:background="@android:color/holo_green_dark"/>
 
 </LinearLayout>

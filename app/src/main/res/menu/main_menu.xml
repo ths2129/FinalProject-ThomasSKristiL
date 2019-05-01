@@ -4,36 +4,26 @@
 
     <item
         android:id="@+id/add"
-        android:title="Add"
         android:icon="@android:drawable/ic_menu_add"
-        app:showAsAction="always"
-        />
+        android:title="Add"
+        app:showAsAction="always" />
     <item
         android:id="@+id/share"
         android:icon="@android:drawable/ic_menu_share"
         android:title="Share"
-        app:showAsAction="always"
-        />
-
-    <item
-        android:id="@+id/save"
-        android:icon="@android:drawable/ic_menu_save"
-        android:title="Save"
-        app:showAsAction="never"
-        />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/camera"
         android:icon="@android:drawable/ic_menu_camera"
         android:title="camera"
-        app:showAsAction="never"
-        />
+        app:showAsAction="never" />
 
 
-        <item
-            android:id="@+id/sign_out_menu"
-            android:title="string/sign"
-            app:showAsAction="never"/>
+    <item
+        android:id="@+id/sign_out_menu"
+        android:title="Signout"
+        app:showAsAction="never" />
 
 
 </menu>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Apprende a etre Environemental</string>
+    <string name="change">Apprende les practiques environmentales</string>
+    <string name="company">Entreprises respectueuses de l\'environement</string>
+    <string name="company_description">Appredndre ce que les entreprises respectent l\'environment</string>
+    <string name="earth_point">15 points</string>
+    <string name="email">E-mail representant local</string>
+    <string name="email_description">Envoyer un courrier electronique au representant local sur les questions environementales</string>
+    <string name="forum">Forum</string>
+    <string name="forum_description">Echanger des idees</string>
+    <string name="game">Jeu sur le Recyclage</string>
+    <string name="game_description">Jeu sur le recyclage avec des recompenses</string>
+    <string name="game_name">Decharge</string>
+    <string name="game_over">Jeu termine</string>
+    <string name="game_rules">Recycler pour un score eleve</string>
+    <string name="garbage_point">-5 points</string>
+    <string name="go_back">revenir</string>
+    <string name="high_score">Score Eleve</string>
+    <string name="plastic_point">5 points</string>
+    <string name="player_high_score">Score Eleve</string>
+    <string name="quit">QUITTER</string>
+    <string name="quiz">Faits sur le carbone et quiz</string>
+    <string name="quiz_description">Apprendre des faits ecologiques</string>
+    <string name="recycle_point">25 points</string>
+    <string name="recycling_centers">Centres de recyclage</string>
+    <string name="recycling_centers_description">Carte des cartres de recyclage</string>
+    <string name="rules">Etre Repestueux</string>
+    <string name="send_button_label">Envoyer</string>
+    <string name="sign">Deconnexion</string>
+    <string name="start">DEBUT</string>
+    <string name="teach_green">Cliquuez pour commencer</string>
+    <string name="welcome">Bienvenue</string>
+    <string name="selection_page">Page d\'activite</string>
+    <string name="starting_score">Le Score : 0</string>
+    <string name="the_score_no_score">"Le Score : "</string>
+</resources>

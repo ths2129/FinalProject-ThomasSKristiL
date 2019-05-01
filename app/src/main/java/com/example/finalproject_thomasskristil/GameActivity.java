@@ -1,14 +1,19 @@
 package com.example.finalproject_thomasskristil;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +22,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.firebase.ui.auth.AuthUI;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,17 +39,21 @@ public class GameActivity extends AppCompatActivity {
     private int frameHeight, frameWidth, initialFrameWidth;
     private LinearLayout startLayout;
 
-    private ImageView character, garbage, orange, earth;
+    private ImageView character, garbage, plastic, recycle, earth, bus;
     private Drawable imageBoxRight, imageBoxLeft;
 
     // Size
     private int characterSize;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
 
     // Position
-    private float boxX, boxY;
-    private float blackX, blackY;
-    private float orangeX, orangeY;
+    private float characterX, characterY;
+    private float garbageX, garbageY;
+    private float plasticX, plasticY;
+    private float recycleX, recycleY;
     private float earthX, earthY;
+    private float busX, busY;
 
     // Score
     private TextView scoreLabel, highScoreLabel;
@@ -57,7 +70,10 @@ public class GameActivity extends AppCompatActivity {
     private boolean action_flg = false;
     private boolean earthDrop = false;
 
-    private MediaPlayer background;
+    private FirebaseDatabase mFireBaseDatabase;
+    private DatabaseReference mHighScoreDataBaseReference;
+
+    private MediaPlayer background; //My main music
 
 
     @Override
@@ -69,16 +85,19 @@ public class GameActivity extends AppCompatActivity {
         background.setLooping(true);
         background.start();
 
-
-
         soundPlayer = new SoundPlayer(this);
+
+        mFireBaseDatabase = FirebaseDatabase.getInstance();
+        mHighScoreDataBaseReference = mFireBaseDatabase.getReference("High Score");
 
         gameFrame = findViewById(R.id.gameFrame);
         startLayout = findViewById(R.id.startLayout);
         character = findViewById(R.id.character);
         garbage = findViewById(R.id.garbage);
-        orange = findViewById(R.id.orange);
+        plastic = findViewById(R.id.plastic);
+        recycle = findViewById(R.id.recycle_game_piece);
         earth = findViewById(R.id.earth);
+        bus = findViewById(R.id.bus);
         scoreLabel = findViewById(R.id.scoreLabel);
         highScoreLabel = findViewById(R.id.highScoreLabel);
 
@@ -88,7 +107,7 @@ public class GameActivity extends AppCompatActivity {
         // High Score
         settings = getSharedPreferences("GAME_DATA", Context.MODE_PRIVATE);
         highScore = settings.getInt("HIGH_SCORE", 0);
-        highScoreLabel.setText("High Score : " + highScore);
+        highScoreLabel.setText("HIgh Score : " + highScore);
     }
 
     public void changePos() {
@@ -96,24 +115,68 @@ public class GameActivity extends AppCompatActivity {
         // Add timeCount
         timeCount += 20;
 
-        // Orange
-        orangeY += 12;
+        // plastic bottle
+        plasticY += 12;
+        float plasticCenterX = plasticX + plastic.getWidth() / 2;
+        float plasticCenterY = plasticY + plastic.getHeight() / 2;
 
-        float orangeCenterX = orangeX + orange.getWidth() / 2;
-        float orangeCenterY = orangeY + orange.getHeight() / 2;
-
-        if (hitCheck(orangeCenterX, orangeCenterY)) {
-            orangeY = frameHeight + 100;
+        if (hitCheck(plasticCenterX, plasticCenterY)) {
+            plasticY = frameHeight + 100;
             score += 5;
             soundPlayer.setWaterBottle();
         }
 
-        if (orangeY > frameHeight) {
-            orangeY = -100;
-            orangeX = (float) Math.floor(Math.random() * (frameWidth - orange.getWidth()));
+        if (plasticY > frameHeight) {
+            plasticY = -100;
+            plasticX = (float) Math.floor(Math.random() * (frameWidth - plastic.getWidth()));
         }
-        orange.setX(orangeX);
-        orange.setY(orangeY);
+        plastic.setX(plasticX);
+        plastic.setY(plasticY);
+
+
+
+        recycleY +=40;
+
+        float recycleCenterX = recycleX + recycle.getWidth() / 2;
+        float recycleCenterY = recycleY + recycle.getHeight() / 2;
+
+        if (hitCheck(recycleCenterX, recycleCenterY)) {
+            recycleY = frameHeight + 100;
+            score += 25;
+            soundPlayer.setWaterBottle();
+        }
+
+        if (recycleY > frameHeight) {
+            recycleY = -12000;
+            recycleX = (float) Math.floor(Math.random() * (frameWidth - recycle.getWidth()));
+        }
+        recycle.setX(recycleX);
+        recycle.setY(recycleY);
+
+
+
+//Bus
+        busX +=10; //speed
+
+        float busCenterX = busX + bus.getWidth() / 2;
+        float busCenterY = busY + bus.getHeight() / 2;
+
+        if (hitCheck(busCenterX, busCenterY)) {
+            busX = frameWidth + 0;
+            score += 0;
+            soundPlayer.setWaterBottle();
+        }
+
+        if (busX > frameWidth) {
+            busX = -11000;
+            busY = (float) Math.floor(Math.random() * (frameWidth - bus.getWidth()));
+        }
+        bus.setX(busX);
+        bus.setY(busY);
+
+
+
+
 
         // Earth Drop
         if (!earthDrop && timeCount % 10000 == 0) {
@@ -125,10 +188,10 @@ public class GameActivity extends AppCompatActivity {
         if (earthDrop) {
             earthY += 20;
 
-            float pinkCenterX = earthX + earth.getWidth() / 2;
-            float pinkCenterY = earthY + earth.getWidth() / 2;
+            float earthCenterX = earthX + earth.getWidth() / 2;
+            float earthCenterY = earthY + earth.getWidth() / 2;
 
-            if (hitCheck(pinkCenterX, pinkCenterY)) {
+            if (hitCheck(earthCenterX, earthCenterY)) {
                 earthY = frameHeight + 30;
                 score += 15;
                 // Change FrameWidth
@@ -144,14 +207,14 @@ public class GameActivity extends AppCompatActivity {
             earth.setY(earthY);
         }
 
-        // Black
-        blackY += 18;
+        // Garbage
+        garbageY += 18;
 
-        float blackCenterX = blackX + garbage.getWidth() / 2;
-        float blackCenterY = blackY + garbage.getHeight() / 2;
+        float garbageCenterX = garbageX + garbage.getWidth() / 2;
+        float garbageCenterY = garbageY + garbage.getHeight() / 2;
 
-        if (hitCheck(blackCenterX, blackCenterY)) {
-            blackY = frameHeight + 100;
+        if (hitCheck(garbageCenterX, garbageCenterY)) {
+            garbageY = frameHeight + 100;
             score -= 5;
 
 
@@ -159,50 +222,51 @@ public class GameActivity extends AppCompatActivity {
             frameWidth = frameWidth * 80 / 100;
             changeFrameWidth(frameWidth);
             soundPlayer.setGarbage();
-            if (frameWidth <= characterSize) {
+            if (frameWidth <= characterSize) { //loser
                 gameOver();
+                ForumConstructor scorePush = new ForumConstructor(scoreLabel.getText().toString(), null, null);
+                mHighScoreDataBaseReference.push().setValue(scorePush);
             }
 
         }
 
-        if (blackY > frameHeight) {
-            blackY = -100;
-            blackX = (float) Math.floor(Math.random() * (frameWidth - garbage.getWidth()));
+        if (garbageY > frameHeight) {
+            garbageY = -100;
+            garbageX = (float) Math.floor(Math.random() * (frameWidth - garbage.getWidth()));
         }
 
-        garbage.setX(blackX);
-        garbage.setY(blackY);
+        garbage.setX(garbageX);
+        garbage.setY(garbageY);
 
         // This is where character ID moves
         if (action_flg) {
             // mouse click
-            boxX += 14;
+            characterX += 15;
             character.setImageDrawable(imageBoxRight);
         } else {
             // mouse release
-            boxX -= 14;
+            characterX -= 15;
             character.setImageDrawable(imageBoxLeft);
         }
 
-        // Check box position.
-        if (boxX < 0) {
-            boxX = 0;
+        if (characterX < 0) {
+            characterX = 0;
             character.setImageDrawable(imageBoxRight);
         }
-        if (frameWidth - characterSize < boxX) {
-            boxX = frameWidth - characterSize;
+        if (frameWidth - characterSize < characterX) {
+            characterX = frameWidth - characterSize;
             character.setImageDrawable(imageBoxLeft);
         }
 
-        character.setX(boxX);
+        character.setX(characterX);
 
-        scoreLabel.setText("The Score : " + score);
+       scoreLabel.setText("High Score : "  + score);
 
     }
 
     public boolean hitCheck(float x, float y) {
-        if (boxX <= x && x <= boxX + characterSize &&
-                boxY <= y && y <= frameHeight) {
+        if (characterX <= x && x <= characterX + characterSize &&
+                characterY <= y && y <= frameHeight) {
             return true;
         }
         return false;
@@ -219,7 +283,7 @@ public class GameActivity extends AppCompatActivity {
         timer.cancel();
         timer = null;
         start_flg = false;
-        Toast.makeText(this, "Game Over", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.game_over, Toast.LENGTH_LONG).show();
 
         // Before showing startLayout, sleep 1 second.
         try {
@@ -233,8 +297,10 @@ public class GameActivity extends AppCompatActivity {
         startLayout.setVisibility(View.VISIBLE);
         character.setVisibility(View.INVISIBLE);
         garbage.setVisibility(View.INVISIBLE);
-        orange.setVisibility(View.INVISIBLE);
+        plastic.setVisibility(View.INVISIBLE);
+        recycle.setVisibility(View.INVISIBLE);//can see after game end
         earth.setVisibility(View.INVISIBLE);
+        bus.setVisibility(View.INVISIBLE);
 
         // Update High Score
         if (score > highScore) {
@@ -271,8 +337,8 @@ public class GameActivity extends AppCompatActivity {
             initialFrameWidth = frameWidth;
 
             characterSize = character.getHeight();
-            boxX = character.getX();
-            boxY = character.getY();
+            characterX = character.getX();
+            characterY = character.getY();
         }
 
         frameWidth = initialFrameWidth;
@@ -280,22 +346,29 @@ public class GameActivity extends AppCompatActivity {
         //where the chnaracter and falling pieces begin
         character.setX(0.0f);
         garbage.setY(3000.0f);
-        orange.setY(3000.0f);
+        plastic.setY(3000.0f);
+        recycle.setY(3000.0f);
         earth.setY(3000.0f);
+        bus.setX(0.0f);
 
-        orangeY = orange.getY();
+        plasticY = plastic.getY();
         earthY = earth.getY();
-        blackY = character.getY();
+        recycleY = recycle.getY();
+        garbageY = character.getY();
+        busY = bus.getY();
 
 
         character.setVisibility(View.VISIBLE);
         garbage.setVisibility(View.VISIBLE);
-        orange.setVisibility(View.VISIBLE);
+        plastic.setVisibility(View.VISIBLE);
+        recycle.setVisibility(View.VISIBLE);
         earth.setVisibility(View.VISIBLE);
+        bus.setVisibility(View.VISIBLE);
+
 
         timeCount = 0;
         score = 0;
-        scoreLabel.setText("The Score : 0");
+        scoreLabel.setText(R.string.starting_score);
 
 
         timer = new Timer();
@@ -322,12 +395,55 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.game_menu, menu);
+        return true;
+    }
+
+
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.selection_screen:
+                Toast.makeText(this,"Bye", Toast.LENGTH_LONG).show();
+                selectionScreen();
+                background.stop();
+                return true;
+            case R.id.camera:
+                Toast.makeText(this, "capture Baby", Toast.LENGTH_SHORT).show();
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                //(takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                background.stop();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }}
+
+        public void selectionScreen(){
+        Intent intent = new Intent(this, SecondActivity.class);
+        startActivity(intent);
+        }
     public void onDestroy() {
         super.onDestroy();
         background.stop();
     }
 
-}
+    private void signOut() {
+        background.stop();
+        Intent intent = new Intent(this, SecondActivity.class);
+        startActivity(intent);
+
+    }
+    public void onPause() {
+        super.onPause();
+        background.stop();
+    }}
+
+
 
 
 

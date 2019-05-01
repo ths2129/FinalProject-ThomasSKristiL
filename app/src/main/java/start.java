@@ -11,6 +11,7 @@ import com.example.finalproject_thomasskristil.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;*/
 
+/*
 public class start extends AppCompatActivity {
 
     //private InterstitialAd interstitial;
@@ -21,6 +22,7 @@ public class start extends AppCompatActivity {
         setContentView(R.layout.activity_start);
 
 
+*/
 /*        // Create the interstitial.
         interstitial = new InterstitialAd(this);
 
@@ -47,7 +49,8 @@ public class start extends AppCompatActivity {
 
         if (interstitial.isLoaded()) {
             interstitial.show();
-        }*/
+        }*//*
+
 
     }
 
@@ -68,4 +71,4 @@ public class start extends AppCompatActivity {
 
         return super.dispatchKeyEvent(event);
     }
-}
+}*/

@@ -11,11 +11,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
+
+import com.firebase.ui.auth.AuthUI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +30,7 @@ public class SecondActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     private ArrayList<Selection>selections; //Connects to the intialData method
     private SelectionAdapter selectionAdapter; //calling the adapter
-    private MediaPlayer background;
+   // private MediaPlayer background;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -37,9 +40,9 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_selection_page);
 
 
-        background = MediaPlayer.create(this, R.raw.recycler_screen_music);
-        background.setLooping(true);
-        background.start();
+       // background = MediaPlayer.create(this, R.raw.recycler_screen_music);
+       // background.setLooping(true);
+       // background.start();
 
         dataToInitialize();
         recyclerView = findViewById(R.id.recycler_view);
@@ -62,23 +65,22 @@ public class SecondActivity extends AppCompatActivity {
                 }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
     }
+
+
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.save:
-                Intent intent = new Intent();
-
-                Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
-                return true;
             case R.id.share:
                 Toast.makeText(this, "Share it Baby", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.sign_out_menu:
+                AuthUI.getInstance().signOut(this);
                 Toast.makeText(this,"Bye", Toast.LENGTH_LONG).show();
-                signOut();
+                //onDestroy();
                 return true;
             case R.id.camera:
                 Toast.makeText(this, "capture Baby", Toast.LENGTH_SHORT).show();
@@ -97,10 +99,10 @@ public class SecondActivity extends AppCompatActivity {
 
     public void onDestroy() {
         super.onDestroy();
-        background.stop();
+        //background.stop();
     }
     public void onPause() {
         super.onPause();
-        background.stop();
+        //background.stop();
 }}
 

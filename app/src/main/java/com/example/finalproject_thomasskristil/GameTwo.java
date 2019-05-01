@@ -3,6 +3,7 @@ package com.example.finalproject_thomasskristil;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -36,9 +37,18 @@ public class GameTwo extends AppCompatActivity {
         }
     }
 
-        public void tryAgain(View view) {
-        startActivity(new Intent(getApplicationContext(), GameActivity.class));
 
+    public void quitGame(View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            finishAndRemoveTask();
+        } else {
+            finish();
         }
+
+
+
+
+
+}
     }
 

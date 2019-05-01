@@ -21,7 +21,6 @@
             android:layout_toRightOf="@+id/activity_image"
             android:autoLink="web"
             android:linksClickable="true"
-            android:text="link"
 
             />
 

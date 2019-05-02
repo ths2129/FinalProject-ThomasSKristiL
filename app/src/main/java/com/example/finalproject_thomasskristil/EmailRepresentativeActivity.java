@@ -1,59 +1,65 @@
 package com.example.finalproject_thomasskristil;
 
-
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.InputFilter;
-import android.text.TextWatcher;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.widget.Spinner;
 
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.data.model.User;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.functions.FirebaseFunctions;
-import com.google.firebase.functions.FirebaseFunctionsException;
-import com.google.firebase.functions.HttpsCallableResult;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import static com.example.finalproject_thomasskristil.Keys.PERSON;
+import static com.example.finalproject_thomasskristil.Keys.REQUEST_CODE;
 
 public class EmailRepresentativeActivity extends AppCompatActivity {
+
+
+    private Spinner representative;
+    private EditText emailBody;
+    private FirebaseDatabase mFireBaseDatabase;
+    private DatabaseReference mMessagesDataBaseReference;
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_email_representative);
+        mFireBaseDatabase = FirebaseDatabase.getInstance();
+        mMessagesDataBaseReference = mFireBaseDatabase.getReference().child("email");
+
+        emailBody = (EditText) findViewById(R.id.email_body);
+
+
+
+        representative = findViewById(R.id.district);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.name, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        representative.setAdapter(spinnerAdapter);
+
+
+    }
+
+    public void SubmitHome(View view) {
+
+        String hasRep = (String) representative.getSelectedItem();
+
+        final ForumConstructor emailToRep = new ForumConstructor(emailBody.getText().toString(), hasRep, null);
+        mMessagesDataBaseReference.push().setValue(emailToRep);
+
+
+        Intent email = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto",hasRep,null));
+        email.putExtra(Intent.EXTRA_SUBJECT, "Environmental concerns from constituency"); // uses key
+        email.putExtra(Intent.EXTRA_TEXT,emailBody.getText());
+        setResult(REQUEST_CODE, email); //sends the whole email
+        startActivity(Intent.createChooser(email,"Send email "));
+        // finish();//launches to activity result - essential!
+
+
+    }
 
 }

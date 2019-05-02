@@ -34,4 +34,17 @@
     <string name="starting_score">The Score : 0</string>
     <string name="the_score_no_score">The Score : </string>
     <string name="title_activity_recycle_maps">Map</string>
+
+    <string-array name="name">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+
+    </string-array>
+
+
+
 </resources>

@@ -12,7 +12,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class RecycleMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
+    private GoogleMap mGowanus1, mGowanus2, mBronx, mManhattan1, mManhattan2, mQueens1, mQueens2, mStaten, mJersey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +36,60 @@ public class RecycleMapsActivity extends FragmentActivity implements OnMapReadyC
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        mGowanus1 = googleMap;
+        mGowanus2 = googleMap;
+        mBronx = googleMap;
+        mManhattan1 = googleMap;
+        mManhattan2 = googleMap;
+        mQueens1 = googleMap;
+        mQueens2 = googleMap;
+        mStaten = googleMap;
+        mJersey = googleMap;
+
+
+
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng gowanus1 = new LatLng(40.6746108,-73.9921886);
+        mGowanus1.addMarker(new MarkerOptions().position(gowanus1).title("US Recycling Inc"));
+        mGowanus1.moveCamera(CameraUpdateFactory.newLatLng(gowanus1));
+
+        LatLng gowanus2 = new LatLng(40.678336,-73.987445);
+        mGowanus2.addMarker(new MarkerOptions().position(gowanus2).title("Lower East Side Ecology Center Electronic Waste Recycling Warehouse"));
+        mGowanus2.moveCamera(CameraUpdateFactory.newLatLng(gowanus2));
+
+        LatLng bronx = new LatLng(40.817895,-73.931312);
+        mBronx.addMarker(new MarkerOptions().position(bronx).title("New York Recycling"));
+        mBronx.moveCamera(CameraUpdateFactory.newLatLng(bronx));
+
+        LatLng manhattan1 = new LatLng(40.752547,-73.973735);
+        mManhattan1.addMarker(new MarkerOptions().position(manhattan1).title("4th Bin"));
+        mManhattan1.moveCamera(CameraUpdateFactory.newLatLng(manhattan1));
+
+
+        LatLng manhattan2 = new LatLng(40.750537,-73.980592);
+        mManhattan2.addMarker(new MarkerOptions().position(manhattan2).title("ERI"));
+       // mManhattan2.moveCamera(CameraUpdateFactory.newLatLng(manhattan2));
+        mManhattan1.animateCamera(
+                CameraUpdateFactory.newLatLngZoom(manhattan2,15f)
+        );
+
+        LatLng queens1 = new LatLng(40.6939307,-74.0969077);
+        mQueens1.addMarker(new MarkerOptions().position(queens1).title("Allocco Recycling"));
+        mQueens1.moveCamera(CameraUpdateFactory.newLatLng(queens1));
+
+        LatLng queens2 = new LatLng(40.732457,-73.937612);
+        mQueens2.addMarker(new MarkerOptions().position(queens2).title("Electronic Straps Recycling"));
+        mQueens2.moveCamera(CameraUpdateFactory.newLatLng(queens2));
+
+
+        LatLng statenIsland = new LatLng( 40.635444,-74.128719);
+        mStaten.addMarker(new MarkerOptions().position(statenIsland).title("Millennium Recycling Corporation"));
+        mStaten.moveCamera(CameraUpdateFactory.newLatLng(statenIsland));
+
+        LatLng jersey = new LatLng(40.739842,-74.044706);
+        mJersey.addMarker(new MarkerOptions().position(jersey).title("All American Recycling"));
+        mJersey.moveCamera(CameraUpdateFactory.newLatLng(jersey));
+
     }
 }

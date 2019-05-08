@@ -23,16 +23,11 @@ public class SelectionAdapter extends RecyclerView.Adapter<SelectionViewHolder> 
     public RelativeLayout relativeLayout;
 
 
-
-    //private ArrayList<String> mLink = new ArrayList<>();
-
-
     public SelectionAdapter(List<Selection> selections, Context context) { //constructor
         this.selections = selections;
         this.context = context; //Array and context
         //mLink = link;
     }
-
 
     @Override
     public SelectionViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) { //this is a parent view being reference // ViewGroup is the parent
@@ -46,10 +41,6 @@ public class SelectionAdapter extends RecyclerView.Adapter<SelectionViewHolder> 
         holder.activitySelection.setText(selection.activity);
         holder.descriptionSelection.setText(selection.description);
         holder.activityImage.setImageResource(selection.photoID);
-
-
-
-
 
 
     }

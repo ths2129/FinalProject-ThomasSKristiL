@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Teach Green</string>
+    <string name="app_name">Teach Green NYC</string>
     <string name="welcome">Welcome</string>
     <string name="change">Learn Green Practices</string>
     <string name="teach_green">Click to Begin</string>
@@ -7,8 +7,8 @@
     <string name="quiz_description">Learn facts about about green practices</string>
     <string name="company">Green Companies</string>
     <string name="company_description">Learn what companies engage in green practices</string>
-    <string name="email">Email Local Representative</string>
-    <string name="email_description">Email your local representative about green initiatives</string>
+    <string name="email">Email Local Council</string>
+    <string name="email_description">Email your local district Council about environmental questions and concerns</string>
     <string name="forum">Forum</string>
     <string name="forum_description">Exchange ideas</string>
     <string name="game">Recycling Game</string>
@@ -16,13 +16,13 @@
     <string name="recycling_centers">Recycling Centers</string>
     <string name="recycling_centers_description">Map of recycling center locations</string>
     <string name="game_name">Land Fill</string>
-    <string name="start">START</string>
+    <string name="start" translatable="false">START</string>
     <string name="quit">QUIT</string>
     <string name="high_score">High Score</string>
     <string name="player_high_score">"High Score : "</string>
     <string name="sign">Sign Out</string>
     <string name="send_button_label">Send</string>
-    <string name="rules">Remeber to be respectful</string>
+    <string name="rules">Remember to be respectful</string>
     <string name="game_rules">Recycle to Score High</string>
     <string name="go_back">Return</string>
     <string name="game_over">Game Over</string>
@@ -34,17 +34,129 @@
     <string name="starting_score">The Score : 0</string>
     <string name="the_score_no_score">The Score : </string>
     <string name="title_activity_recycle_maps">Map</string>
+    <string name="write_concern">Write about a concern</string>
+    <string name="your_district">Select your district"</string>
+    <string name="envrionment">This forum is for sharing environmental concerns</string>
+    <string name="who_are_you">What is your first-name?</string>
+    <string name="tesla">Tesla</string>
+    <string name="borough_forum">What Borough Forum Do you Want to Join?</string>
+    <string name="bourghone">Manhattan</string>
+    <string name="bourghtwo">Bronx</string>
+    <string name="bourghthree">Brooklyn</string>
+    <string name="bourghfour">Queens</string>
+    <string name="bourghfive">Staten Island</string>
+    <string name="makeup">Beauty</string>
+    <string name="technology">Services</string>
+    <string name="clothing">Clothing</string>
+    <string name="food">Food</string>
+    <string name="map_question">What green companies are you interested?</string>
+
+
+    <string name="qu1">What items are recyclable?</string>
+    <string name="anw1">Plastic bottles</string>
+    <string name="anw2">Batteries</string>
+    <string name="anw3">Glass</string>
+    <string name="anw4">All these items are recyclable</string>
+
+    <string name="next">Next question</string>
+    <string name="correct">Correct!</string>
+    <string name="good_job">Good job</string>
+    <string name="better_luck"> Better Luck Next Time</string>
+    <string name="one"> At least you got one!</string>
+    <string name="two"> You are almost there!Q</string>
+    <string name="three"> Half way there!</string>
+    <string name="four"> You are knowledgeable</string>
+    <string name="five"> almost perfect!</string>
+    <string name="perfect"> Perfect</string>
+    <string name="play_again">Play Again?</string>
+    <string name="right_answer">Right Answer</string>
+
+
+    <string name="qu2">Who can recycle?</string>
+    <string name="anw5">You</string>
+    <string name="anw6">Everyone can recycle</string>
+    <string name="anw7">Neighbors</string>
+    <string name="anw8">Your parents</string>
+
+    <string name="qu3">What actions will save the Earth?</string>
+    <string name="anw9">Recycling</string>
+    <string name="anw10">Planting trees</string>
+    <string name="anw11">All these actions will save the earth</string>
+    <string name="anw12">Reducing plastic usage</string>
+
+    <string name="qu4">What is an example of reducing?</string>
+    <string name="anw13">All of these answers</string>
+    <string name="anw14">Using paper bags for groceries</string>
+    <string name="anw15">Take shorter showers</string>
+    <string name="anw16">Using a water bottle</string>
+
+
+    <string name="qu5">Who can contact their local Council with environmental concerns?</string>
+    <string name="anw17">Dogs</string>
+    <string name="anw18">Empire State Building</string>
+    <string name="anw19">You</string>
+    <string name="anw20">None of these answers</string>
+
 
     <string-array name="name">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
+        <item>1 - Margaret S. Chin</item>
+        <item>2 - Carlina Rivera</item>
+        <item>3 - Corey Johnson</item>
+        <item>4 - Keith Powers</item>
+        <item>5 - Ben Kallos</item>
+        <item>6 - Helen Rosenthal</item>
+        <item>7 - Mark Levine</item>
+        <item>8 - Diana Ayala</item>
+        <item>9 - Bill Perkins</item>
+        <item>10 - Ydanis Rodrigues</item>
+        <item>11 - Andrew Cohen</item>
+        <item>12 - Andy King</item>
+        <item>13 - Mark Gjonaj</item>
+        <item>14 - Fernando Cabrera</item>
+        <item>15 - Ritchie J. Torres</item>
+        <item>16 - Vanessa L. Gibson</item>
+        <item>17 - Rafael Salamanca Jr.</item>
+        <item>18 - Ruben Diaz, Sr.</item>
+        <item>19 - Paul Vallone</item>
+        <item>20 - Peter Koo</item>
+        <item>21 - Francisco Moya</item>
+        <item>22 - Costa Constantinides</item>
+        <item>23 - Barry Grodenchik</item>
+        <item>24 - Rory I. Lancman</item>
+        <item>25 - Daniel Dromm</item>
+        <item>26 - Jimmy Van Bramer</item>
+        <item>27 - I. Daneek Miller</item>
+        <item>28 - Adrienne E. Adams</item>
+        <item>28 - Karen Koslowitz</item>
+        <item>29 - Robert Holden</item>
+        <item>30 - Robert Holden</item>
+        <item>31 - Donovan J. Richard</item>
+        <item>32 - Eric A. Ulrich</item>
+        <item>33 - Stephen T. Levin</item>
+        <item>34 - Antonio Reynoso</item>
+        <item>35 - Laurie A. Cumbo</item>
+        <item>36 - Robert E. Cornegy, Jr.</item>
+        <item>37 - Rafael L. Espinal Jr.</item>
+        <item>38 - Carlos Menchaca</item>
+        <item>39 - Brad Lander</item>
+        <item>40 - Mathieu Eugene</item>
+        <item>41 - Alicka Ampry-Samuel</item>
+        <item>42 - Inez Barron</item>
+        <item>43 - Justin Brannan</item>
+        <item>44 - Kalman Yeger</item>
+        <item>45 - Vacant</item>
+        <item>46 - Alan N. Maisel</item>
+        <item>47 - Mark Treyger</item>
+        <item>48 - Chaim M. Deutsch</item>
+        <item>49 - Deborah Rose</item>
+        <item>50 - Steven Matteo</item>
+        <item>51 - Jospeh C. Borelli</item>
 
     </string-array>
-
+    <string name="title_activity_green_company">Map</string>
+    <string name="title_activity_green_clothing">Map</string>
+    <string name="title_activity_green_tech">Map</string>
+    <string name="title_activity_green_food">Map</string>
 
 
 </resources>

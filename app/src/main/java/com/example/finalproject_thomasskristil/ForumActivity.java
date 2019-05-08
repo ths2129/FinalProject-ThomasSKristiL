@@ -406,9 +406,6 @@ public class ForumActivity extends AppCompatActivity {
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.share:
-                Toast.makeText(this, "Share it Baby", Toast.LENGTH_SHORT).show();
-                return true;
             case R.id.sign_out_menu:
                 Toast.makeText(this,"Bye", Toast.LENGTH_LONG).show();
                 AuthUI.getInstance().signOut(this);
@@ -416,7 +413,7 @@ public class ForumActivity extends AppCompatActivity {
             case R.id.camera:
                 Toast.makeText(this, "capture Baby", Toast.LENGTH_SHORT).show();
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                //(takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                //(takePictureIntent.resolveActivity(getPackageManager()) != null); {
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                 return true;
             default:

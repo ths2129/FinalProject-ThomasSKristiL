@@ -17,7 +17,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.FrameLayout; //llibrary
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,41 +32,40 @@ import java.util.TimerTask;
 import java.util.TooManyListenersException;
 import java.util.concurrent.TimeUnit;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity { //use Viewgroup for User components * enevt handling
 
-    // Frame
+    // the screen
     private FrameLayout gameFrame;
     private int frameHeight, frameWidth, initialFrameWidth;
-    private LinearLayout startLayout;
+    private LinearLayout startLayout; //XML
 
     private ImageView character, garbage, plastic, recycle, earth, bus;
     private Drawable imageBoxRight, imageBoxLeft;
-
     // Size
     private int characterSize;
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
 
-    // Position
-    private float characterX, characterY;
+    // osition of pieces
+    private float characterX, characterY; //decimals
     private float garbageX, garbageY;
     private float plasticX, plasticY;
     private float recycleX, recycleY;
     private float earthX, earthY;
     private float busX, busY;
 
-    // Score
+    // Scores
     private TextView scoreLabel, highScoreLabel;
     private int score, highScore, timeCount;
     private SharedPreferences settings;
 
-    // Class
-    private Timer timer;
+
+    private Timer timing;//imported library
     private Handler handler = new Handler();
     private SoundPlayer soundPlayer;
 
-    // Status
-    private boolean start_flg = false;
+    // status
+    private boolean start_flg = false; //OnTouchEvent Method
     private boolean action_flg = false;
     private boolean earthDrop = false;
 
@@ -82,10 +81,10 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         background = MediaPlayer.create(this, R.raw.game_music);
-        background.setLooping(true);
-        background.start();
+        background.setLooping(true); //keeps going
+        background.start(); //begins
 
-        soundPlayer = new SoundPlayer(this);
+        soundPlayer = new SoundPlayer(this); //main music
 
         mFireBaseDatabase = FirebaseDatabase.getInstance();
         mHighScoreDataBaseReference = mFireBaseDatabase.getReference("High Score");
@@ -101,7 +100,8 @@ public class GameActivity extends AppCompatActivity {
         scoreLabel = findViewById(R.id.scoreLabel);
         highScoreLabel = findViewById(R.id.highScoreLabel);
 
-        imageBoxLeft = getResources().getDrawable(R.drawable.box_left);
+        imageBoxLeft = getResources().getDrawable(R.drawable.box_left); //character image
+
         imageBoxRight = getResources().getDrawable(R.drawable.box_right);
 
         // High Score
@@ -112,13 +112,14 @@ public class GameActivity extends AppCompatActivity {
 
     public void changePos() {
 
-        // Add timeCount
+        // adds to the fall
         timeCount += 20;
 
         // plastic bottle
-        plasticY += 12;
         float plasticCenterX = plasticX + plastic.getWidth() / 2;
+
         float plasticCenterY = plasticY + plastic.getHeight() / 2;
+        plasticY += 12;
 
         if (hitCheck(plasticCenterX, plasticCenterY)) {
             plasticY = frameHeight + 100;
@@ -134,8 +135,7 @@ public class GameActivity extends AppCompatActivity {
         plastic.setY(plasticY);
 
 
-
-        recycleY +=40;
+        recycleY += 40;
 
         float recycleCenterX = recycleX + recycle.getWidth() / 2;
         float recycleCenterY = recycleY + recycle.getHeight() / 2;
@@ -154,9 +154,8 @@ public class GameActivity extends AppCompatActivity {
         recycle.setY(recycleY);
 
 
-
-//Bus
-        busX +=10; //speed
+//DOve not a bus!
+        busX += 10; //speed
 
         float busCenterX = busX + bus.getWidth() / 2;
         float busCenterY = busY + bus.getHeight() / 2;
@@ -175,11 +174,8 @@ public class GameActivity extends AppCompatActivity {
         bus.setY(busY);
 
 
-
-
-
         // Earth Drop
-        if (!earthDrop && timeCount % 10000 == 0) {
+        if (!earthDrop && timeCount % 10000 == 0) { //starts over again
             earthDrop = true;
             earthY = -20;
             earthX = (float) Math.floor(Math.random() * (frameWidth - earth.getWidth()));
@@ -195,7 +191,7 @@ public class GameActivity extends AppCompatActivity {
                 earthY = frameHeight + 30;
                 score += 15;
                 // Change FrameWidth
-                if (initialFrameWidth > frameWidth * 110 / 100) { //keeping in the decreasing and increasing frame
+                if (initialFrameWidth > frameWidth * 110 / 100) { //opens the frame, but won't bypass orginalsize
                     frameWidth = frameWidth * 110 / 100;
                     changeFrameWidth(frameWidth);
                 }
@@ -208,7 +204,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
         // Garbage
-        garbageY += 18;
+        garbageY += 18; // count
 
         float garbageCenterX = garbageX + garbage.getWidth() / 2;
         float garbageCenterY = garbageY + garbage.getHeight() / 2;
@@ -218,34 +214,33 @@ public class GameActivity extends AppCompatActivity {
             score -= 5;
 
 
-            // Change FrameWidth
+            // Change FrameWidth this is how you lose!
             frameWidth = frameWidth * 80 / 100;
             changeFrameWidth(frameWidth);
             soundPlayer.setGarbage();
             if (frameWidth <= characterSize) { //loser
-                gameOver();
+                gameOver(); // toast message
                 ForumConstructor scorePush = new ForumConstructor(scoreLabel.getText().toString(), null, null);
-                mHighScoreDataBaseReference.push().setValue(scorePush);
+                mHighScoreDataBaseReference.push().setValue(scorePush); // pushes high score to database
             }
 
         }
 
         if (garbageY > frameHeight) {
-            garbageY = -100;
-            garbageX = (float) Math.floor(Math.random() * (frameWidth - garbage.getWidth()));
+            garbageY = -100; //falls down the Y axis
+            garbageX = (float) Math.floor(Math.random() * (frameWidth - garbage.getWidth())); //random x fall
         }
 
-        garbage.setX(garbageX);
+        garbage.setX(garbageX); //setting its location
         garbage.setY(garbageY);
 
         // This is where character ID moves
         if (action_flg) {
-            // mouse click
-            characterX += 15;
-            character.setImageDrawable(imageBoxRight);
+            characterX += 15; //clicking the mouse adds a 15 plus to the x axis
+            character.setImageDrawable(imageBoxRight); //character moves
         } else {
             // mouse release
-            characterX -= 15;
+            characterX -= 15; //clicking the mouse deletes a 15 plus to the x axis
             character.setImageDrawable(imageBoxLeft);
         }
 
@@ -260,7 +255,7 @@ public class GameActivity extends AppCompatActivity {
 
         character.setX(characterX);
 
-       scoreLabel.setText("High Score : "  + score);
+        scoreLabel.setText("High Score : " + score);
 
     }
 
@@ -272,17 +267,17 @@ public class GameActivity extends AppCompatActivity {
         return false;
     }
 
-    public void changeFrameWidth(int frameWidth) {
-        ViewGroup.LayoutParams params = gameFrame.getLayoutParams();
+    public void changeFrameWidth(int frameWidth) { //Frame chnane method
+        ViewGroup.LayoutParams params = gameFrame.getLayoutParams(); //viewgroup
         params.width = frameWidth;
         gameFrame.setLayoutParams(params);
     }
 
     public void gameOver() {
         // Stop timer.
-        timer.cancel();
-        timer = null;
-        start_flg = false;
+        timing.cancel();
+        timing = null;
+        start_flg = false; //no move moving
         Toast.makeText(this, R.string.game_over, Toast.LENGTH_LONG).show();
 
         // Before showing startLayout, sleep 1 second.
@@ -302,9 +297,9 @@ public class GameActivity extends AppCompatActivity {
         earth.setVisibility(View.INVISIBLE);
         bus.setVisibility(View.INVISIBLE);
 
-        // Update High Score
+        // Update High Score in database
         if (score > highScore) {
-            highScore = score;
+            highScore = score; //keeps highest score
             highScoreLabel.setText("High Score : " + highScore);
 
             SharedPreferences.Editor editor = settings.edit();
@@ -358,7 +353,7 @@ public class GameActivity extends AppCompatActivity {
         busY = bus.getY();
 
 
-        character.setVisibility(View.VISIBLE);
+        character.setVisibility(View.VISIBLE); //pieces are now vivible
         garbage.setVisibility(View.VISIBLE);
         plastic.setVisibility(View.VISIBLE);
         recycle.setVisibility(View.VISIBLE);
@@ -369,10 +364,8 @@ public class GameActivity extends AppCompatActivity {
         timeCount = 0;
         score = 0;
         scoreLabel.setText(R.string.starting_score);
-
-
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
+        timing = new Timer();
+        timing.schedule(new TimerTask() {
             @Override
             public void run() {
                 if (start_flg) {
@@ -387,7 +380,7 @@ public class GameActivity extends AppCompatActivity {
         }, 0, 20);
     }
 
-    public void quitGame(View view) {
+    public void quitGame(View view) { //onClick
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             finishAndRemoveTask();
         } else {
@@ -404,11 +397,10 @@ public class GameActivity extends AppCompatActivity {
     }
 
 
-
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.selection_screen:
-                Toast.makeText(this,"Bye", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Bye", Toast.LENGTH_LONG).show();
                 selectionScreen();
                 background.stop();
                 return true;
@@ -421,12 +413,14 @@ public class GameActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-        }}
+        }
+    }
 
-        public void selectionScreen(){
+    public void selectionScreen() {
         Intent intent = new Intent(this, SecondActivity.class);
         startActivity(intent);
-        }
+    }
+
     public void onDestroy() {
         super.onDestroy();
         background.stop();
@@ -438,10 +432,12 @@ public class GameActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
     public void onPause() {
         super.onPause();
         background.stop();
-    }}
+    }
+}
 
 
 

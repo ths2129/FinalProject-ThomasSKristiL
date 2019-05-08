@@ -74,9 +74,6 @@ public class SecondActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.share:
-                Toast.makeText(this, "Share it Baby", Toast.LENGTH_SHORT).show();
-                return true;
             case R.id.sign_out_menu:
                 AuthUI.getInstance().signOut(this);
                 Toast.makeText(this,"Bye", Toast.LENGTH_LONG).show();

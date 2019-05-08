@@ -37,7 +37,7 @@ public class SelectionViewHolder extends RecyclerView.ViewHolder implements View
         activitySelection = (TextView) itemView.findViewById(R.id.activity);
         descriptionSelection = (TextView) itemView.findViewById(R.id.description);
         activityImage = (ImageView) itemView.findViewById(R.id.activity_image);
-        relativeLayout = (RelativeLayout) itemView.findViewById(R.id.recycler_view);
+        relativeLayout = (RelativeLayout) itemView.findViewById(R.id.recycler_view_green); //linked
         itemView.setOnClickListener(this);
 
 
@@ -68,6 +68,9 @@ public class SelectionViewHolder extends RecyclerView.ViewHolder implements View
                     context.startActivity(intent);
 
                 } else if (getLayoutPosition() == 3) {
+                    Intent intent = new Intent(context, GreenChoice.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
 
                 } else if (getLayoutPosition() == 4) {
                     Intent intent = new Intent (context, RecycleMapsActivity.class);

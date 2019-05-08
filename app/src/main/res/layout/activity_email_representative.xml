@@ -2,31 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/council_xlm"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EmailRepresentativeActivity"
-    android:orientation="vertical">
+    android:background="@drawable/email_rep_map"
+    android:orientation="vertical"
+    tools:context=".EmailRepresentativeActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/your_district" />
 
     <Spinner
         android:id="@+id/district"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="district">
+        android:spinnerMode="dropdown"
+        android:text="@string/your_district">
 
     </Spinner>
 
     <EditText
         android:id="@+id/email_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/write_concern" />
+
+    <Button
+        android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/earth_point"/>
-
-
-<Button
-    android:id="@+id/submit"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:onClick="SubmitHome"
-    android:text="Submit" />
+        android:layout_marginTop="25dp"
+        android:onClick="SubmitHome"
+        android:text="Email" />
 
 </LinearLayout>

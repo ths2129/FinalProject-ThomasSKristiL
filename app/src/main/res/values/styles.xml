@@ -8,4 +8,30 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="council_xlm">
+        <item name="android:background">@drawable/email_rep_map</item>
+        <item name="android:layout_marginBottom">50dp</item>
+        <item name="android:layout_marginLeft">25dp</item>
+        <item name="android:layout_marginRight">25dp</item>
+        <item name="android:layout_marginTop">25dp</item>
+        <item name="android:paddingRight">25dp</item>
+        <item name="android:paddingLeft">25dp</item>
+        <item name="android:paddingTop">10dp</item>
+    </style>
+
+    <style name="forum_xlm">
+        <item name="android:background">@drawable/forum_xlm</item>
+        <item name="android:layout_marginBottom">50dp</item>
+        <item name="android:layout_marginLeft">25dp</item>
+        <item name="android:layout_marginRight">25dp</item>
+        <item name="android:layout_marginTop">25dp</item>
+        <item name="android:paddingRight">25dp</item>
+        <item name="android:paddingLeft">25dp</item>
+        <item name="android:paddingTop">10dp</item>
+    </style>
+
+    <style name="quiz">
+        <item name="android:textSize">10sp</item>
+    </style>
+
 </resources>
